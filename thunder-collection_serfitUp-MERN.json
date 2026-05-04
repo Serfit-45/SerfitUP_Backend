@@ -1,0 +1,168 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "serfitUp-MERN",
+    "collectionId": "60cc258d-77ee-4f7c-a160-c16ac60ca398",
+    "dateExported": "2025-11-12T18:57:39.976Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "39a94d32-f3a5-4c2b-8e2b-950460240d6f",
+            "colId": "60cc258d-77ee-4f7c-a160-c16ac60ca398",
+            "containerId": "",
+            "name": "PROJECT - Create Project",
+            "url": "http://localhost:4000/api/projects",
+            "method": "POST",
+            "sortNum": 15000,
+            "created": "2025-04-28T21:51:27.834Z",
+            "modified": "2025-05-25T22:21:35.595Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "  {\n    \"projectName\": \"Ecommerce Pluma\",\n    \"clientName\": \"Pluma\",\n    \"description\": \"Proyecto Ecommerce con React\"\n  }",
+                "form": []
+            }
+        },
+        {
+            "_id": "900d8eac-a596-442b-8fef-cc7b599d439d",
+            "colId": "60cc258d-77ee-4f7c-a160-c16ac60ca398",
+            "containerId": "",
+            "name": "PROJECT - Get All Project",
+            "url": "http://localhost:4000/api/projects",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2025-04-28T21:23:16.237Z",
+            "modified": "2025-04-28T21:23:54.440Z",
+            "headers": []
+        },
+        {
+            "_id": "ee5b2cbc-3a61-4744-a3b8-4b21848f08a3",
+            "colId": "60cc258d-77ee-4f7c-a160-c16ac60ca398",
+            "containerId": "",
+            "name": "PROJECT - Get Project By Id",
+            "url": "http://localhost:4000/api/projects/683cd1ac766631a03b288b50",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2025-04-30T15:05:04.290Z",
+            "modified": "2025-06-03T03:26:32.332Z",
+            "headers": []
+        },
+        {
+            "_id": "a3012f5f-14f3-44e0-977e-d954cc0d2955",
+            "colId": "60cc258d-77ee-4f7c-a160-c16ac60ca398",
+            "containerId": "",
+            "name": "PROJECT - Update Project",
+            "url": "http://localhost:4000/api/projects/683cd1ac766631a03b288b50",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2025-04-30T17:44:34.403Z",
+            "modified": "2025-06-03T03:27:32.096Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"projectName\": \"Ecommerce Pluma  ¡¡¡Actualizado!!!\",\n  \"clientName\": \"Pluma\",\n  \"description\": \"Proyecto Ecommerce con React\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "a29f126c-4e1f-45e1-9b1b-68a18f6d5a48",
+            "colId": "60cc258d-77ee-4f7c-a160-c16ac60ca398",
+            "containerId": "",
+            "name": "PROJECT - Delete Project",
+            "url": "http://localhost:4000/api/projects/681d32eb0070998e3a78267d",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2025-04-30T22:44:04.217Z",
+            "modified": "2025-05-25T22:33:09.019Z",
+            "headers": []
+        },
+        {
+            "_id": "6abbce71-27e8-4227-8887-df44189ae58e",
+            "colId": "60cc258d-77ee-4f7c-a160-c16ac60ca398",
+            "containerId": "",
+            "name": "TASK - Create Task",
+            "url": "http://localhost:4000/api/projects/683397ef98cbd29ea94c20d3/tasks",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2025-05-06T15:57:52.100Z",
+            "modified": "2025-05-26T14:11:42.825Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Definir framework CSS para Mantaña nuevo\",\n  \"description\": \"Montaña marca original nuevo\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "860b9fda-e1c2-4403-9081-bca5ab45ac81",
+            "colId": "60cc258d-77ee-4f7c-a160-c16ac60ca398",
+            "containerId": "",
+            "name": "TASK - Get Tasks",
+            "url": "http://localhost:4000/api/projects/683397ef98cbd29ea94c20d3/tasks",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2025-05-11T22:51:58.929Z",
+            "modified": "2025-05-25T23:14:55.828Z",
+            "headers": []
+        },
+        {
+            "_id": "8c8cb932-e906-46a3-b32f-75b7c8614d35",
+            "colId": "60cc258d-77ee-4f7c-a160-c16ac60ca398",
+            "containerId": "",
+            "name": "TAsk - Get Task By Id",
+            "url": "http://localhost:4000/api/projects/683397ef98cbd29ea94c20d3/tasks/6834766c81505b1aec66c36a",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2025-05-14T15:59:46.988Z",
+            "modified": "2025-05-26T14:12:55.726Z",
+            "headers": []
+        },
+        {
+            "_id": "df9a0b8a-fa05-4fe8-9bad-9850c8bd4062",
+            "colId": "60cc258d-77ee-4f7c-a160-c16ac60ca398",
+            "containerId": "",
+            "name": "Task - Update Task By Id",
+            "url": "http://localhost:4000/api/projects/683397ef98cbd29ea94c20d3/tasks/6834766c81505b1aec66c36a",
+            "method": "PUT",
+            "sortNum": 100000,
+            "created": "2025-05-17T04:20:15.270Z",
+            "modified": "2025-05-26T14:13:16.877Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Tarea Actualizada!!!!\",\n  \"description\": \"Descripción Actualizada!!!!\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "9c7e7eed-0e39-4395-93bf-3c73108c3011",
+            "colId": "60cc258d-77ee-4f7c-a160-c16ac60ca398",
+            "containerId": "",
+            "name": "TASK - Delete Task by id",
+            "url": "http://localhost:4000/api/projects/683397ef98cbd29ea94c20d3/tasks/6834766c81505b1aec66c36a",
+            "method": "DELETE",
+            "sortNum": 120000,
+            "created": "2025-05-17T22:18:57.140Z",
+            "modified": "2025-05-26T14:13:53.346Z",
+            "headers": []
+        },
+        {
+            "_id": "042585c8-4184-4004-83aa-dfd4b70bc996",
+            "colId": "60cc258d-77ee-4f7c-a160-c16ac60ca398",
+            "containerId": "",
+            "name": "TASK - Update Status",
+            "url": "http://localhost:4000/api/projects/683397ef98cbd29ea94c20d3/tasks/6834769e81505b1aec66c36e/status",
+            "method": "POST",
+            "sortNum": 130000,
+            "created": "2025-05-25T21:26:04.604Z",
+            "modified": "2025-05-26T14:16:23.083Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"status\": \"undeReview\"\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "QOHSmxYlGNJKcIySCdZx4PMdfMONFLuG8b9xLifeLVilFgmU82XB4SxKoAxkrm-u_Ak_zXwYjcQyJBjnGdkv5g"
+}

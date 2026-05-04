@@ -1,0 +1,273 @@
+{
+    "info": {
+        "_postman_id": "dfa43c49-9601-4bc9-b42d-f7fe8ae922e6",
+        "name": "serfitUp-MERN",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "PROJECT - Create Project",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:4000/api/projects",
+                    "path": [
+                        "api",
+                        "projects"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "  {\n    \"projectName\": \"Ecommerce Pluma\",\n    \"clientName\": \"Pluma\",\n    \"description\": \"Proyecto Ecommerce con React\"\n  }"
+                }
+            }
+        },
+        {
+            "name": "PROJECT - Get All Project",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:4000/api/projects",
+                    "path": [
+                        "api",
+                        "projects"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000"
+                }
+            }
+        },
+        {
+            "name": "PROJECT - Get Project By Id",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:4000/api/projects/683cd1ac766631a03b288b50",
+                    "path": [
+                        "api",
+                        "projects",
+                        "683cd1ac766631a03b288b50"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000"
+                }
+            }
+        },
+        {
+            "name": "PROJECT - Update Project",
+            "request": {
+                "method": "PUT",
+                "url": {
+                    "raw": "http://localhost:4000/api/projects/683cd1ac766631a03b288b50",
+                    "path": [
+                        "api",
+                        "projects",
+                        "683cd1ac766631a03b288b50"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"projectName\": \"Ecommerce Pluma  ¡¡¡Actualizado!!!\",\n  \"clientName\": \"Pluma\",\n  \"description\": \"Proyecto Ecommerce con React\"\n}"
+                }
+            }
+        },
+        {
+            "name": "PROJECT - Delete Project",
+            "request": {
+                "method": "DELETE",
+                "url": {
+                    "raw": "http://localhost:4000/api/projects/681d32eb0070998e3a78267d",
+                    "path": [
+                        "api",
+                        "projects",
+                        "681d32eb0070998e3a78267d"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000"
+                }
+            }
+        },
+        {
+            "name": "TASK - Create Task",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:4000/api/projects/683397ef98cbd29ea94c20d3/tasks",
+                    "path": [
+                        "api",
+                        "projects",
+                        "683397ef98cbd29ea94c20d3",
+                        "tasks"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"name\": \"Definir framework CSS para Mantaña nuevo\",\n  \"description\": \"Montaña marca original nuevo\"\n}"
+                }
+            }
+        },
+        {
+            "name": "TASK - Get Tasks",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:4000/api/projects/683397ef98cbd29ea94c20d3/tasks",
+                    "path": [
+                        "api",
+                        "projects",
+                        "683397ef98cbd29ea94c20d3",
+                        "tasks"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000"
+                }
+            }
+        },
+        {
+            "name": "TAsk - Get Task By Id",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:4000/api/projects/683397ef98cbd29ea94c20d3/tasks/6834766c81505b1aec66c36a",
+                    "path": [
+                        "api",
+                        "projects",
+                        "683397ef98cbd29ea94c20d3",
+                        "tasks",
+                        "6834766c81505b1aec66c36a"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000"
+                }
+            }
+        },
+        {
+            "name": "Task - Update Task By Id",
+            "request": {
+                "method": "PUT",
+                "url": {
+                    "raw": "http://localhost:4000/api/projects/683397ef98cbd29ea94c20d3/tasks/6834766c81505b1aec66c36a",
+                    "path": [
+                        "api",
+                        "projects",
+                        "683397ef98cbd29ea94c20d3",
+                        "tasks",
+                        "6834766c81505b1aec66c36a"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"name\": \"Tarea Actualizada!!!!\",\n  \"description\": \"Descripción Actualizada!!!!\"\n}"
+                }
+            }
+        },
+        {
+            "name": "TASK - Delete Task by id",
+            "request": {
+                "method": "DELETE",
+                "url": {
+                    "raw": "http://localhost:4000/api/projects/683397ef98cbd29ea94c20d3/tasks/6834766c81505b1aec66c36a",
+                    "path": [
+                        "api",
+                        "projects",
+                        "683397ef98cbd29ea94c20d3",
+                        "tasks",
+                        "6834766c81505b1aec66c36a"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000"
+                }
+            }
+        },
+        {
+            "name": "TASK - Update Status",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:4000/api/projects/683397ef98cbd29ea94c20d3/tasks/6834769e81505b1aec66c36e/status",
+                    "path": [
+                        "api",
+                        "projects",
+                        "683397ef98cbd29ea94c20d3",
+                        "tasks",
+                        "6834769e81505b1aec66c36e",
+                        "status"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"status\": \"undeReview\"\n}"
+                }
+            }
+        }
+    ]
+}
