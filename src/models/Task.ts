@@ -14,7 +14,7 @@ export type TaskStatus = typeof taskStatus[keyof typeof taskStatus]
 export interface ITask extends Document {
     name: string,
     description: string
-    project: Types.ObjectId
+    milestone: Types.ObjectId
     status: TaskStatus
     completedBy: {
         user: Types.ObjectId,
@@ -36,9 +36,9 @@ export const TaskSchema : Schema = new Schema({
         trim: true,
         required: true 
     },
-    project: {
+    milestone: {
         type: Types.ObjectId,
-        ref: 'Project'
+        ref: 'Milestone'
     },
     status: {
         type: String,

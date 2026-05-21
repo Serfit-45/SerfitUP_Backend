@@ -1,13 +1,12 @@
-import mongoose, {Schema, Document, PopulatedDoc, Types} from "mongoose";
-import Task, { ITask } from "./Task";
+import mongoose, { Schema, Document, PopulatedDoc, Types } from "mongoose";
+import { IMilestone } from "./Milestone";
 import { IUser } from "./User";
-import Note from "./Note";
 
 export interface IProject extends Document {
-    projectName: string,
+    projectName: string
     clientName: string
     description: string
-    tasks: PopulatedDoc<ITask & Document>[]
+    milestones: PopulatedDoc<IMilestone & Document>[]
     manager: PopulatedDoc<IUser & Document>
     team: PopulatedDoc<IUser & Document>[]
 }
@@ -28,10 +27,10 @@ const ProjectSchema: Schema = new Schema({
         required: true,
         trim: true
     },
-    tasks: [
+    milestones: [
         {
             type: Types.ObjectId,
-            ref: 'Task'
+            ref: 'Milestone'
         }
     ],
     manager: {
@@ -41,22 +40,20 @@ const ProjectSchema: Schema = new Schema({
     team: [
         {
             type: Types.ObjectId,
-            ref: 'User'     
+            ref: 'User'
         }
     ]
-}, {timestamps: true})
+}, { timestamps: true })
 
-//Middleware
-ProjectSchema.pre('deleteOne', {document: true}, async function() {
+ProjectSchema.pre('deleteOne', { document: true }, async function () {
     const projectId = this._id
-    if(!projectId) return
+    if (!projectId) return
 
-    const tasks = await Task.find({project: projectId})
-    for(const task of tasks) {
-        await Note.deleteMany({task: task.id})
+    const Milestone = mongoose.model('Milestone')
+    const milestones = await Milestone.find({ project: projectId })
+    for (const milestone of milestones) {
+        await (milestone as any).deleteOne()
     }
-
-    await Task.deleteMany({project: projectId})
 })
 
 const Project = mongoose.model<IProject>('Project', ProjectSchema)
