@@ -48,6 +48,7 @@ router.delete('/:projectId',
 )
 
 /** Team routes */
+router.get('/:projectId/team/users', TeamMemberController.getAllUsers)
 router.post('/:projectId/team/find',
     body('email').isEmail().toLowerCase().withMessage('Email no válido'),
     handleInputErrors,

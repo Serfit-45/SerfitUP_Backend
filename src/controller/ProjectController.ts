@@ -1,6 +1,8 @@
 import { Request, Response } from "express"
 import Project from "../models/Project"
 import { Types } from "mongoose"
+import Milestone from "../models/Milestone"
+import Task from "../models/Task"
 
 export class ProjectController {
 
@@ -18,12 +20,116 @@ export class ProjectController {
 
     static getAllProjects = async (req: Request, res: Response) => {
         try {
-            const projects = await Project.find({
-                $or: [
-                    { manager: req.user._id },
-                    { team: req.user._id }
-                ]
-            })
+            const projects = await Project.aggregate([
+                {
+                    $match: {
+                        $or: [{ manager: req.user._id }, { team: req.user._id }]
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'milestones',
+                        localField: '_id',
+                        foreignField: 'project',
+                        as: 'milestoneList'
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'tasks',
+                        let: { milestoneIds: '$milestoneList._id' },
+                        pipeline: [
+                            { $match: { $expr: { $in: ['$milestone', '$$milestoneIds'] } } },
+                            {
+                                $group: {
+                                    _id: '$milestone',
+                                    total: { $sum: 1 },
+                                    completed: { $sum: { $cond: [{ $eq: ['$status', 'completed'] }, 1, 0] } }
+                                }
+                            }
+                        ],
+                        as: 'milestoneTaskGroups'
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'users',
+                        localField: 'team',
+                        foreignField: '_id',
+                        as: 'teamDetails'
+                    }
+                },
+                {
+                    $addFields: {
+                        milestoneProgress: {
+                            $map: {
+                                input: '$milestoneList',
+                                as: 'ms',
+                                in: {
+                                    name: '$$ms.name',
+                                    taskGroup: {
+                                        $arrayElemAt: [
+                                            {
+                                                $filter: {
+                                                    input: '$milestoneTaskGroups',
+                                                    as: 'tg',
+                                                    cond: { $eq: ['$$tg._id', '$$ms._id'] }
+                                                }
+                                            },
+                                            0
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        teamDetails: {
+                            $map: {
+                                input: '$teamDetails',
+                                as: 'm',
+                                in: { _id: '$$m._id', name: '$$m.name' }
+                            }
+                        }
+                    }
+                },
+                {
+                    $addFields: {
+                        milestoneProgress: {
+                            $map: {
+                                input: '$milestoneProgress',
+                                as: 'mp',
+                                in: {
+                                    name: '$$mp.name',
+                                    total: { $ifNull: ['$$mp.taskGroup.total', 0] },
+                                    completed: { $ifNull: ['$$mp.taskGroup.completed', 0] },
+                                    percent: {
+                                        $cond: [
+                                            { $eq: [{ $ifNull: ['$$mp.taskGroup.total', 0] }, 0] },
+                                            0,
+                                            {
+                                                $round: [
+                                                    { $multiply: [{ $divide: ['$$mp.taskGroup.completed', '$$mp.taskGroup.total'] }, 100] },
+                                                    0
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    $project: {
+                        projectName: 1,
+                        clientName: 1,
+                        description: 1,
+                        manager: 1,
+                        createdAt: 1,
+                        teamDetails: 1,
+                        milestoneProgress: 1
+                    }
+                }
+            ])
             res.json(projects)
         } catch (error) {
             res.status(500).json({ error: 'Error del servidor' })

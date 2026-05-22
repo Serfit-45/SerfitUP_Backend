@@ -15,6 +15,7 @@ export interface ITask extends Document {
     name: string,
     description: string
     milestone: Types.ObjectId
+    assignedTo: Types.ObjectId | null
     status: TaskStatus
     completedBy: {
         user: Types.ObjectId,
@@ -39,6 +40,11 @@ export const TaskSchema : Schema = new Schema({
     milestone: {
         type: Types.ObjectId,
         ref: 'Milestone'
+    },
+    assignedTo: {
+        type: Types.ObjectId,
+        ref: 'User',
+        default: null
     },
     status: {
         type: String,

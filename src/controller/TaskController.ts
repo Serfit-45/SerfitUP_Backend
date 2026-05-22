@@ -6,6 +6,7 @@ export class TaskController {
         try {
             const task = new Task(req.body)
             task.milestone = req.milestone.id
+            task.assignedTo = req.body.assignedTo ?? null
             req.milestone.tasks.push(task.id)
             await Promise.allSettled([task.save(), req.milestone.save()])
             res.send("Tarea creada correctamente")
@@ -27,6 +28,7 @@ export class TaskController {
     static getTaskById = async (req: Request, res: Response) => {
         try {
             const task = await Task.findById(req.task.id)
+                .populate({ path: 'assignedTo', select: 'id name email' })
                 .populate({ path: 'completedBy.user', select: 'id name email' })
                 .populate({ path: 'notes', populate: { path: 'createdBy', select: 'id name email' } })
             res.json(task)
@@ -39,6 +41,7 @@ export class TaskController {
         try {
             req.task.name = req.body.name
             req.task.description = req.body.description
+            req.task.assignedTo = req.body.assignedTo ?? null
             await req.task.save()
             res.send("Tarea actualizada correctamente")
         } catch (error) {

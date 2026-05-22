@@ -3,7 +3,6 @@ import User, { IUser } from '../models/User'
 import { PopulatedDoc } from 'mongoose'
 import Project from '../models/Project'
 
-/** Controlador de miembros del equipo, maneja la búsqueda de usuarios por correo electrónico, obtención del equipo de un proyecto y agregar o eliminar miembros del equipo */
 export class TeamMemberController {
     static findMemberByEmail = async (req: Request, res: Response) => {
         const { email } = req.body
@@ -45,6 +44,11 @@ export class TeamMemberController {
 
         res.send('Usuario agregado al equipo') 
     }   
+    static getAllUsers = async (req: Request, res: Response) => {
+        const users = await User.find({ _id: { $ne: req.user._id } }).select('id email name')
+        res.json(users)
+    }
+
     static removeMemberById = async (req: Request, res: Response) => {
         const { userId } = req.params    
         if(!req.project.team.some(team => team.toString() === userId)){
