@@ -6,8 +6,29 @@ interface IEmail {
     tocken: string
 }
 
+const getFrontendBaseUrl = () => {
+  const rawUrl =
+    process.env.FRONTEND_URL?.trim() ||
+    process.env.FRONTEND_ORIGIN?.trim() ||
+    process.env.CLIENT_URL?.trim() ||
+    'http://localhost:5173';
+
+  const withProtocol = /^https?:\/\//i.test(rawUrl)
+    ? rawUrl
+    : rawUrl.startsWith('localhost')
+      ? `http://${rawUrl}`
+      : `https://${rawUrl}`;
+
+  const result = withProtocol.replace(/\/+$/, '');
+  console.log('[AuthEmail] FRONTEND_URL env:', process.env.FRONTEND_URL, '→ resolved:', result);
+  return result;
+}
+
 export class AuthEmail {
     static sendConfirmationEmail = async (user: IEmail) => {
+    const frontendUrl = getFrontendBaseUrl();
+    const confirmationLink = `${frontendUrl}/auth/confirm-account?token=${encodeURIComponent(user.tocken)}`;
+
       await transporter.sendMail({
         from: `"SerfitUp" <${process.env.SMTP_USER}>`,
         to: user.email,
@@ -19,7 +40,7 @@ export class AuthEmail {
         Has creado tu cuenta en <strong>SerfitUp</strong>, ¡ya casi está todo listo! Solo debes confirmar tu cuenta para poder comenzar a usarla.
         </p> <p style="font-size: 16px; line-height: 1.5; color: #555;"> Para confirmar tu cuenta, visita el siguiente enlace:
         </p> <div style="text-align: center; margin: 20px 0;">
-        <a href="${process.env.FRONTEND_URL}/auth/confirm-account?token=${user.tocken}" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; font-weight: bold; border-radius: 5px;">
+        <a href="${confirmationLink}" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; font-weight: bold; border-radius: 5px;">
         Confirmar Cuenta</a> </div> <p style="font-size: 16px; line-height: 1.5; color: #555;"> También puedes ingresar el siguiente código para confirmar tu cuenta:
         </p> <div style="text-align: center; font-size: 18px; font-weight: bold; margin: 20px 0;"> ${user.tocken}
         </div> <p style="font-size: 16px; line-height: 1.5; color: #555;"> <strong>Nota:</strong> Este token expira en 10 minutos. </p>
@@ -28,6 +49,9 @@ export class AuthEmail {
     }
 
     static sendPasswordResetToken = async (user: IEmail) => {
+      const frontendUrl = getFrontendBaseUrl();
+      const resetPasswordLink = `${frontendUrl}/auth/new-password?token=${encodeURIComponent(user.tocken)}`;
+
       await transporter.sendMail({
         from: `"SerfitUp" <${process.env.SMTP_USER}>`,
         to: user.email,
@@ -39,7 +63,7 @@ export class AuthEmail {
         Has solicitado restablecer tu contraseña en <strong>SerfitUp</strong>.
         </p> <p style="font-size: 16px; line-height: 1.5; color: #555;"> Para restablecer tu contraseña, visita el siguiente enlace:
         </p> <div style="text-align: center; margin: 20px 0;">
-        <a href="${process.env.FRONTEND_URL}/auth/new-password?token=${user.tocken}" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; font-weight: bold; border-radius: 5px;">
+        <a href="${resetPasswordLink}" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; font-weight: bold; border-radius: 5px;">
         Restablecer Contraseña</a> </div> <p style="font-size: 16px; line-height: 1.5; color: #555;"> También puedes ingresar el siguiente código para restablecer tu contraseña:
         </p> <div style="text-align: center; font-size: 18px; font-weight: bold; margin: 20px 0;"> ${user.tocken}
         </div> <p style="font-size: 16px; line-height: 1.5; color: #555;"> <strong>Nota:</strong> Este token expira en 10 minutos. </p>
