@@ -3,6 +3,17 @@ import User, { IUser } from '../models/User'
 import { PopulatedDoc } from 'mongoose'
 import Project from '../models/Project'
 
+/** Controlador de miembros del equipo, maneja la búsqueda de usuarios por email, 
+ * obtención del equipo de un proyecto, adición y eliminación de miembros del equipo
+ * Cada función maneja una operación específica:
+ * - findMemberByEmail: Busca un usuario por su email y devuelve su información básica.
+ * - getProjectTeam: Obtiene todos los miembros del equipo de un proyecto específico.
+ * - addMemberById: Agrega un miembro al equipo de un proyecto específico por su ID.
+ * - getAllUsers: Obtiene todos los usuarios excepto el usuario actual.
+ * - removeMemberById: Elimina un miembro del equipo de un proyecto específico por su ID.
+ * Cada función maneja errores y devuelve respuestas adecuadas según el resultado de la operación.
+ */
+
 export class TeamMemberController {
     static findMemberByEmail = async (req: Request, res: Response) => {
         const { email } = req.body

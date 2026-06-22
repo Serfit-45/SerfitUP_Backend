@@ -1,6 +1,17 @@
 import type { Request, Response } from "express";
 import Task from "../models/Task";
 
+/** Controlador de tareas, maneja la creación, obtención, actualización y eliminación de tareas
+ * relacionadas con un hito. Cada función maneja una operación específica:
+ * - createTask: Crea una nueva tarea y la asocia al hito actual.
+ * - getMilestoneTasks: Obtiene todas las tareas asociadas al hito actual.
+ * - getTaskById: Obtiene una tarea específica por su ID, incluyendo detalles de asignación, estado y notas.
+ * - updateTask: Actualiza el nombre, descripción y asignación de una tarea específica.
+ * - deleteTask: Elimina una tarea específica y la desasocia del hito actual.
+ * - updateStatus: Actualiza el estado de una tarea específica y registra quién realizó el cambio.
+ * Cada función maneja errores y devuelve respuestas adecuadas según el resultado de la operación.
+ */
+
 export class TaskController {
     static createTask = async (req: Request, res: Response) => {
         try {

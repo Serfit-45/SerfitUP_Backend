@@ -7,7 +7,9 @@ import { generateToken } from "../utils/token";
 import { AuthEmail } from "../emails/AuthEmail";
 import { generateJWT } from "../utils/jwt";
 
-/** Controlador de autenticación, maneja la creación de cuentas, inicio de sesión, confirmación de cuenta y restablecimiento de contraseña */
+/** Controlador de autenticación, maneja la creación de cuentas, inicio de sesión, 
+ * confirmación de cuenta y restablecimiento de contraseña
+ * */
 export class AuthController {
   static createAccount = async (req: Request, res: Response) => {
     try {

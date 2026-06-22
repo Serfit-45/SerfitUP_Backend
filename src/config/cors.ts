@@ -1,5 +1,8 @@
 import { CorsOptions } from 'cors'
-
+/**
+ * Configuración de CORS para permitir solicitudes solo desde el frontend 
+ * o herramientas de testing (origin undefined).
+ */
 export const corsConfig: CorsOptions = {
     origin: function(origin, callback) {
         const whiteList = [process.env.FRONTEND_URL]

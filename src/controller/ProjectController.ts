@@ -4,6 +4,15 @@ import { Types } from "mongoose"
 import Milestone from "../models/Milestone"
 import Task from "../models/Task"
 
+/** Controlador de proyectos, maneja la creación, obtención, actualización y eliminación de proyectos
+ * relacionados con un proyecto. Cada función maneja una operación específica:
+ * - createProject: Crea un nuevo proyecto y lo asocia al usuario actual como manager.
+ * - getAllProjects: Obtiene todos los proyectos en los que el usuario actual es manager o miembro del equipo, incluyendo detalles de hitos y progreso.
+ * - getProjectById: Obtiene un proyecto específico por su ID, verificando que el usuario tenga permiso para verlo.
+ * - updateProject: Actualiza el nombre, cliente y descripción de un proyecto específico.
+ * - deleteProject: Elimina un proyecto específico, verificando que el usuario tenga permiso para hacerlo.
+ * Cada función maneja errores y devuelve respuestas adecuadas según el resultado de la operación.
+ */
 export class ProjectController {
 
     static createProject = async (req: Request, res: Response) => {

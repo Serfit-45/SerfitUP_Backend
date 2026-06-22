@@ -2,7 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import User, { IUser } from '../models/User';
 
-/** Middleware de autenticación, verifica el token JWT y agrega el usuario a la solicitud */
+/** Middleware de autenticación, verifica el token JWT y agrega el usuario a la solicitud
+ * Si el token es válido, se decodifica y se busca el usuario en la base de datos. 
+ * Si se encuentra, se agrega a la solicitud (req.user) y se llama a next() 
+ * para continuar con la siguiente función middleware o ruta. 
+ * Si el token no es válido o no se encuentra el usuario, se devuelve un error 401 o 500 respectivamente.
+ */
 declare global {
     namespace Express {
         interface Request {

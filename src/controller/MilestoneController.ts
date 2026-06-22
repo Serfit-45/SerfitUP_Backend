@@ -2,6 +2,17 @@ import { Request, Response } from "express"
 import Milestone from "../models/Milestone"
 import { Types } from "mongoose"
 
+/**
+ * Controlador de hitos, maneja la creación, obtención, actualización y eliminación de hitos
+ * relacionados con un proyecto. Cada función maneja una operación específica:
+ * - createMilestone: Crea un nuevo hito y lo asocia al proyecto actual.
+ * - getAllMilestones: Obtiene todos los hitos asociados al proyecto actual.
+ * - getMilestoneById: Obtiene un hito específico por su ID, incluyendo sus tareas asociadas.
+ * - updateMilestone: Actualiza el nombre y descripción de un hito específico.
+ * - deleteMilestone: Elimina un hito específico y lo desasocia del proyecto actual.
+ * Cada función maneja errores y devuelve respuestas adecuadas según el resultado de la operación.
+ */
+
 export class MilestoneController {
 
     static createMilestone = async (req: Request, res: Response) => {

@@ -2,7 +2,13 @@ import type {Request, Response} from 'express'
 import Note, {INote} from '../models/Note'
 import { Types } from 'mongoose'
 
-/** Controlador de notas, maneja la creación, obtención y eliminación de notas relacionadas con tareas */
+/** Controlador de notas, maneja la creación, obtención y eliminación de notas relacionadas con tareas 
+ * Cada función maneja una operación específica:
+ * - createNote: Crea una nueva nota y la asocia a la tarea actual.
+ * - getTaskNotes: Obtiene todas las notas asociadas a la tarea actual.
+ * - deleteNote: Elimina una nota específica, verificando que el usuario tenga permiso para hacerlo.
+ * Cada función maneja errores y devuelve respuestas adecuadas según el resultado de la operación.
+*/
 type NoteParams = {
     noteId: Types.ObjectId
 }
