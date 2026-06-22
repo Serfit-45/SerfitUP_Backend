@@ -4,14 +4,17 @@ import { CorsOptions } from 'cors'
  * o herramientas de testing (origin undefined).
  */
 export const corsConfig: CorsOptions = {
-    origin: function(origin, callback) {
-        const whiteList = [process.env.FRONTEND_URL]
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true);
 
-        //Permitir conexión desde el frontend o desde herramientas de testing (origin undefined)
-        if(!origin || whiteList.includes(origin)) {
-            callback(null, true)
-        } else {
-            callback(new Error('Error de CORS'))
-        }
+    if (
+      origin.includes('localhost') ||
+      origin.includes('ngrok-free.dev')
+    ) {
+      return callback(null, true);
     }
+
+    return callback(new Error('Error de CORS'));
+  },
+  credentials: true
 }
