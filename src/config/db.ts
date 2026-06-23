@@ -19,3 +19,5 @@ export const connectDB = async () => {
         exit(1)
     }
 }
+
+console.log("TEST SSH OK ✅");
