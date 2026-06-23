@@ -18,5 +18,3 @@ export const corsConfig: CorsOptions = {
   },
   credentials: true
 }
-console.log("DEPLOY QA OK 🔥");
-//Este es un cambio de prueba para ver si se sube a git correctamente.
