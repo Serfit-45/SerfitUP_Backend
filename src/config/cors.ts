@@ -18,3 +18,5 @@ export const corsConfig: CorsOptions = {
   },
   credentials: true
 }
+
+console.log("AUTO DEPLOY FUNCIONA 🔥");
