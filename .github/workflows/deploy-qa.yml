@@ -1,0 +1,40 @@
+name: Deploy QA SerfitUP
+
+on:
+  push:
+    branches:
+      - qa
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy en servidor QA
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: 172.17.31.25
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+
+            cd /var/www/qa-app
+
+            echo "🔄 Actualizando backend"
+            cd backend
+            git fetch origin
+            git reset --hard origin/qa
+            cd ..
+
+            echo "🔄 Actualizando frontend"
+            cd frontend
+            git fetch origin
+            git reset --hard origin/qa
+            cd ..
+
+            echo "🐳 Rebuild docker SIN CACHE"
+            docker compose down
+            docker compose build --no-cache
+            docker compose up -d
+
+            echo "✅ Deploy completado"
