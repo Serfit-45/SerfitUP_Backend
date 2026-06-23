@@ -18,3 +18,5 @@ export const corsConfig: CorsOptions = {
   },
   credentials: true
 }
+
+//Este es un cambio de prueba para ver si se sube a git correctamente.
