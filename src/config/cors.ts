@@ -9,9 +9,9 @@ export const corsConfig: CorsOptions = {
 
     if (
       origin.includes('localhost') ||
-      origin.includes('ngrok-free.dev')
-    ) {
-      return callback(null, true);
+      origin.includes('ngrok-free.dev') ||
+      origin.includes('172.') // Permitir direcciones IP locales
+    ) {      return callback(null, true);
     }
 
     return callback(new Error('Error de CORS'));
