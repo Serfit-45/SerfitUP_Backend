@@ -7,29 +7,25 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
-      - name: Deploy en servidor QA
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: 172.17.13.51
-          username: root
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            echo "🔄 Actualizando backend"
-            cd /var/www/qa-app/backend
-            git fetch origin
-            git reset --hard origin/qa
+      - name: Actualizar backend
+        run: |
+          cd /var/www/qa-app/backend
+          git fetch origin
+          git reset --hard origin/qa
 
-            echo "🔄 Actualizando frontend"
-            cd /var/www/qa-app/frontend
-            git fetch origin
-            git reset --hard origin/qa
+      - name: Actualizar frontend
+        run: |
+          cd /var/www/qa-app/frontend
+          git fetch origin
+          git reset --hard origin/qa
 
-            echo "🐳 Rebuild Docker SIN CACHE"
-            docker compose down
-            docker compose build --no-cache
-            docker compose up -d
-
-            echo "✅ Deploy completado"
+      - name: Rebuild Docker
+        run: |
+          cd /var/www/qa-app
+          docker compose down
+          docker compose build --no-cache
+          docker compose up -d
+          echo "Deploy completado"
